@@ -1,0 +1,271 @@
+@import url('https://fonts.googleapis.com/css2?family=Jura:wght@300..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+:root {
+    --preload-anim-time: 1.5s;
+    --fade-anim-time: 0.5s;
+    --load-anim-time: calc(var(--preload-anim-time) + 0.5s + var(--fade-anim-time));
+    --load-fast-anim-time: calc(0.5s + var(--fade-anim-time));
+    --loading-color: rgba(50, 0, 0, 1);
+}
+
+a:-webkit-any-link {
+    color: rgb(85, 165, 255);
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+body {
+    display: flex;
+    position: relative;
+
+    font-size: 100%;
+    font-display: swap;
+    white-space: pre-wrap;
+
+    padding: 0px;
+    margin: 0px;
+
+    background-color: var(--loading-color);
+    background-blend-mode: overlay;
+
+    scrollbar-gutter: stable both-edges;
+    max-width: 100%;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    z-index: 0;
+
+    scroll-behavior: smooth;
+}
+
+.bg-placeholder {
+    display: flex;
+    position: absolute;
+    font-size: 100%;
+    padding: 0px;
+    margin: 0px;
+    background-color: var(--loading-color);
+    overflow-y: hidden;
+}
+
+.enable-scrolling {
+    overflow-y: auto;
+}
+
+.load-body-instant {
+    animation: load-body-instant var(--load-anim-time) ease-out forwards;
+}
+
+.load-body-fast {
+    animation: load-body-fast var(--load-fast-anim-time) ease-out forwards;
+}
+
+.load-body-full {
+    animation: load-body-full var(--load-anim-time) ease-out forwards;
+}
+
+.loader-fast {
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    margin: 0px;
+
+    vertical-align: middle;
+    font-family: "Jura", Arial, serif;
+    text-align: center;
+    font-weight: 600;
+    font-size: 24pt;
+    color: rgba(255, 255, 255, 1);
+
+    width: 100vw;
+    height: 100vh;
+    z-index: 9;
+    background-color: var(--loading-color);
+    animation: loading-fast var(--load-fast-anim-time) ease-out forwards;
+}
+
+.loader {
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    margin: 0px;
+
+    vertical-align: middle;
+    font-family: "Jura", Arial, serif;
+    text-align: center;
+    font-weight: 600;
+    font-size: 24pt;
+    color: rgba(255, 255, 255, 1);
+
+    width: 100vw;
+    height: 100vh;
+    z-index: 9;
+    background-color: var(--loading-color);
+    animation: loading var(--load-anim-time) ease-out forwards;
+}
+
+.loader:before{
+    display: block;
+    line-height: 100vh;
+    width: 100vw;
+    height: 100vh;
+    
+    content: "";
+    text-align: center;
+    animation: loading-text var(--preload-anim-time) ease-out forwards;
+}
+
+.page-transition-exit{
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    margin: 0px;
+
+    vertical-align: middle;
+    font-family: "Jura", Arial, serif;
+    text-align: center;
+    font-weight: 600;
+    font-size: 24pt;
+    color: rgba(255, 255, 255, 1);
+
+    width: 100vw;
+    height: 100vh;
+    z-index: 9;
+    background-color: var(--loading-color);
+    animation: leaving var(--fade-anim-time) ease-in forwards;
+}
+
+.page-transition-exit:before{
+    content: "";
+}
+
+@keyframes loading {
+    75% {
+        color: rgba(255, 255, 255, 1);
+        background-color: var(--loading-color);
+    }
+
+    99% {
+        z-index: 9;
+    }
+
+    100% {
+        color: rgba(255, 255, 255, 0);
+        background-color: rgba(50, 0, 0, 0);
+        z-index: -1;
+    }
+}
+
+@keyframes loading-fast {
+    0% {
+        color: rgba(0, 0, 0, 0);
+        background-color: var(--loading-color);
+    }
+
+    99% {
+        z-index: 9;
+    }
+
+    100% {
+        color: rgba(255, 255, 255, 0);
+        background-color: rgba(50, 0, 0, 0);
+        z-index: -1;
+    }
+}
+
+@keyframes leaving {
+    0% {
+        color: rgba(0, 0, 0, 0);
+        background-color: rgba(50, 0, 0, 0);
+        z-index: 9;
+    }
+
+    100% {
+        color: rgba(255, 255, 255, 1);
+        background-color: var(--loading-color);
+        z-index: 9;
+    }
+}
+
+@keyframes loading-text{
+    0% {
+        content: "";
+    }
+    20% {
+        content: ".";
+    }
+    40% {
+        content: "..";
+    }
+    60% {
+        content: "...";
+    }
+    65% {
+        content: "..";
+    }
+    70% {
+        content: ".";
+    }
+    75% {
+        content: "";
+    }
+    80% {
+        content: "R";
+    }
+    85% {
+        content: "RE";
+    }
+    90% {
+        content: "REA";
+    }
+    95% {
+        content: "READ";
+    }
+    100% {
+        content: "READY";
+    }
+}
+
+@keyframes enable-scrolling {
+    99% {
+        overflow-y: hidden;
+    }
+    100% {
+        overflow-y: auto;
+    }
+}
+
+@keyframes load-body-instant {
+    0% {
+        background-color: var(--loading-color);
+    }
+    100% {
+        background-color: var(--loading-color);
+    }
+}
+
+@keyframes load-body-fast {
+    0% {
+        background-color: var(--loading-color);
+    }
+    25% {
+        overflow-y: hidden;
+    }
+    100% {
+        overflow-y: auto;
+        background-color: var(--loading-color);
+    }
+}
+
+@keyframes load-body-full {
+    0% {
+        background-color: var(--loading-color);
+    }
+    75% {
+        overflow-y: hidden;
+    }
+    100% {
+        overflow-y: auto;
+        background-color: var(--loading-color);
+    }
+}
